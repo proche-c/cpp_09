@@ -16,28 +16,30 @@
 #include <map>
 #include <string>
 #include <exception>
+#include <iostream>
+#include <fstream>
 
-template < typename T >
 class BitcoinExchange
 {
 	public:
-		class 	FailToOpenFileException: public exception
+		class 	FailToOpenFileException: public std::exception
 		{
 			virtual const char *what() const throw();
 		};
-		class 	BadInputException: public exception
+		class 	BadInputException: public std::exception
 		{
 			virtual const char *what() const throw();
 		};
-		class 	NegativeNumberException: public exception
+		class 	NegativeNumberException: public std::exception
 		{
 			virtual const char *what() const throw();
 		};
-		class 	LargeNumberException: public exception
+		class 	LargeNumberException: public std::exception
 		{
 			virtual const char *what() const throw();
 		};
 		BitcoinExchange(void);
+		BitcoinExchange(std::string const & filename);
 		BitcoinExchange(BitcoinExchange const & src);
 		~BitcoinExchange(void);
 
@@ -46,7 +48,5 @@ class BitcoinExchange
 	private:
 		std::map<std::string, float>	_data;	
 };
-
-#include "BitcoinExchange.tpp"
 
 #endif

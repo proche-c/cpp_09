@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                    :+:      :+:    :+:   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,49 +12,54 @@
 
 #include "BitcoinExchange.hpp"
 
-template < typename T >
-const char *BitcoinExchange<T>::FailToOpenFileException::what() const throw()
+const char *BitcoinExchange::FailToOpenFileException::what() const throw()
 {
     return "Error: could not open file.";
 }
 
-template < typename T >
-const char *BitcoinExchange<T>::BadInputException::what() const throw()
+const char *BitcoinExchange::BadInputException::what() const throw()
 {
     return "Error: bad input";
 }
 
-template < typename T >
-const char *BitcoinExchange<T>::NegativeNumberException::what() const throw()
+const char *BitcoinExchange::NegativeNumberException::what() const throw()
 {
     return "Error: not a positive number.";
 }
 
-template < typename T >
-const char *BitcoinExchange<T>::LargeNumberException::what() const throw()
+const char *BitcoinExchange::LargeNumberException::what() const throw()
 {
     return "Error: too large a number.";
 }
 
-template < typename T >
-BitcoinExchange<T>::BitcoinExchange(void)
+BitcoinExchange::BitcoinExchange(void)
 {}
 
-template < typename T >
-BitcoinExchange<T>::BitcoinExchange(BitcoinExchange const & src)
-{}
-
-template < typename T >
-BitcoinExchange<T>::~BitcoinExchange(void)
-{}
-
-template < typename T >
-BitcoinExchange<T> & BitcoinExchange<T>::operator=(BitcoinExchange const & src)
+BitcoinExchange::BitcoinExchange(std::string const & filename)
 {
-    if (this != &src)
-    {
-        this->c = src.c;
-    }
-    return (*this);
+    std::ifstream file(filename);
+	std::string line;
+	std::string date;
+	float value;
+	
+	if (!file.is_open())
+		throw BitcoinExchange::FailToOpenFileException();
+	while (std::getline(file, line))
+	{
+		date = line.substr(0, line.find(','));
+	}
+	std::cout << date<< std::endl;
 }
 
+BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
+{
+	*this = src;
+}
+
+BitcoinExchange::~BitcoinExchange(void)
+{}
+
+BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & src)
+{
+    return (*this);
+}

@@ -1,11 +1,11 @@
-NAME = mutantStack
+NAME = bce
 
 SRCS_DIR	=	srcs
 INCS_DIR	=	includes
 OBJS_DIR	=	.objs
 DEPS_DIR	=	.deps
 
-SRCS	=	srcs/main.cpp
+SRCS	=	srcs/main.cpp srcs/BitcoinExchange.cpp
 OBJS	=	$(patsubst $(SRCS_DIR)/%, $(OBJS_DIR)/%, $(SRCS:.cpp=.o))
 DEPS	=	$(patsubst $(SRCS_DIR)/%, $(DEPS_DIR)/%, $(SRCS:.cpp=.d))
 
