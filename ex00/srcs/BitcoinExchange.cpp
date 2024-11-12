@@ -37,7 +37,7 @@ BitcoinExchange::BitcoinExchange(void)
 
 BitcoinExchange::BitcoinExchange(std::string const & filename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
 	std::string line;
 	std::string date;
 	float value;
@@ -47,8 +47,11 @@ BitcoinExchange::BitcoinExchange(std::string const & filename)
 	while (std::getline(file, line))
 	{
 		date = line.substr(0, line.find(','));
+		std::cout << date << std::endl;
+		value = atof(line.substr(line.find(',') + 1));
+		this->_data.insert(std::pair<std::string, float>(data, value));
 	}
-	std::cout << date<< std::endl;
+	// std::cout << date << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
@@ -61,5 +64,6 @@ BitcoinExchange::~BitcoinExchange(void)
 
 BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & src)
 {
+	(void)src;
     return (*this);
 }
