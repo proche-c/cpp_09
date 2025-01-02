@@ -18,17 +18,22 @@
 #include <exception>
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <algorithm>
+
 
 class BitcoinExchange
 {
 	public:
 		class 	FailToOpenFileException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 		class 	BadInputException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 		class 	NegativeNumberException: public std::exception
 		{
@@ -39,14 +44,24 @@ class BitcoinExchange
 			virtual const char *what() const throw();
 		};
 		BitcoinExchange(void);
-		BitcoinExchange(std::string const & filename);
+		BitcoinExchange(std::string const & fileName);
 		BitcoinExchange(BitcoinExchange const & src);
 		~BitcoinExchange(void);
 
 		BitcoinExchange & operator=(BitcoinExchange const & src);
 
+		void	evaluate(char *inputFileName);
+
+		// static	std::string	& cleanLine(std::string	& line);
+		// static	bool	isValidDate(std::string &date);
+
 	private:
-		std::map<std::string, float>	_data;	
+	
+		std::map<std::string, float>	_data;
+		std::string						_firstData;
+		static	std::string	& cleanLine(std::string	& line);
+		static	bool	isValidDate(std::string &date);
+		static	bool	isValidValue(std::string str);
 };
 
 #endif
