@@ -21,6 +21,8 @@
 #include <sstream>
 #include <climits>
 #include <cstdlib>
+#include <cmath>
+#include <algorithm>
 
 class PmergeMe
 {
@@ -35,6 +37,11 @@ class PmergeMe
 			public:
 				virtual const char *what() const throw();
 		};
+		class 	DuplicateElementException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 		PmergeMe(void);
 		PmergeMe(std::string const input);
 		PmergeMe(PmergeMe const & src);
@@ -43,11 +50,16 @@ class PmergeMe
 		PmergeMe & operator=(PmergeMe const & src);
 
 		void	sortVector(void);
-		void	sortList(void)
+		void	sortList(void);
+
+		void	getInitVector(void);
+		void	mergeSort(size_t left, size_t right);
+		void 	merge(size_t left, size_t mid, size_t right)
 ;
 	private:
 	
-		std::vector<int>	_dataVector;
+		std::vector<int>	_initVector;
+		std::vector<int>	_baseVector;
 		std::list<int>		_dataList;
 		std::string const	_input;
 

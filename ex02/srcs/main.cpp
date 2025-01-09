@@ -27,23 +27,27 @@ int main(int argc, char **args)
 			input = input + " " + args[i];
 			i++;
 		}
-		std::cout << "input:" << input << "E" << std::endl;
-	// 	try
-	// 	{
-	// 		RPN	rpn(args[1]);
-	// 		rpn.evaluate();
-	// 	}
-	// 	catch(const RPN::DivisionByZeroException & e)
-	// 	{
-	// 		std::cout << e.what() << std::endl;
-	// 	}
-	// 	catch(const RPN::BadInputException & e)
-	// 	{
-	// 		std::cout << e.what() << std::endl;
-	// 	}
-	// }
-	// else
-	// 	std::cout << "Error: argument needed."  << std::endl;
+		// std::cout << "input:" << input << "E" << std::endl;
+		try
+		{
+			PmergeMe	pmergeme(input);
+			pmergeme.sortVector();
+		}
+		catch(const PmergeMe::BadInputException & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		catch(const PmergeMe::OutOfIntLimitsException & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		catch(const PmergeMe::DuplicateElementException & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
 	}
+	else
+		std::cout << "Error: argument needed."  << std::endl;
+
 	return (0);
 }

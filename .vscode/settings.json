@@ -53,6 +53,13 @@
         "algorithm": "cpp",
         "deque": "cpp",
         "list": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "__debug": "cpp",
+        "__errc": "cpp",
+        "__mutex_base": "cpp",
+        "atomic": "cpp",
+        "charconv": "cpp",
+        "exception": "cpp",
+        "system_error": "cpp"
     }
 }
